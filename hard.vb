@@ -1,14 +1,14 @@
 Sub Test()
 
-' Assigning a header for the stock names
+' Assigning header for the stock names
 Dim ticker As String
 Cells(1, 10).Value = "Ticker"
 
-' Assigning a header for the total volume of stock
+' Assigning header for the total volume of stock
 Dim total As Double
 Cells(1, 13).Value = "Total Stock Volume"
 
-'Assigning headers for Yearly Change and Percent Change and variable types
+'Assigning Yearly Change and Percent Change
 Dim yearlychange As Double
 Dim percentchange As Double
 Cells(1, 11).Value = "Yearly Change"
@@ -61,7 +61,7 @@ For i = 2 To lastrow
                 percentchange = (yearlychange / firstprice)
             
             'Closing if statement
-            End If    
+            End If
 
 
         'Printing the percentage change
@@ -100,13 +100,50 @@ For i = 2 To lastrowK
         Cells(i, 11).Interior.ColorIndex = 4
     
     'if cell value is not greater than zero fill with red color
-    Else    
+    Else
         Cells(i, 11).Interior.ColorIndex = 3
     
     'Closing if statement
     End If
 
 'Closing loop
+Next i
+
+
+'Assigning headers for the greatest indicators
+
+Cells(1, 17).Value = "Ticker"
+Cells(1, 18).Value = "Value"
+Cells(2, 16).Value = "Greatest % Increase"
+Cells(3, 16).Value = "Greatest % Decrease"
+Cells(4, 16).Value = "Greatest Total Volume"
+
+'Finding the last non-blank cell in column L
+Dim lastrowL As Long
+lastrowL = Cells(Rows.Count, 12).End(xlUp).Row
+
+'Loop for finding the greatest indicators
+For i = 2 To lastrowL
+
+    'Finding maximum value and stock symbol on percent change
+    If Cells(i, 12).Value = Application.WorksheetFunction.Max(Range("L2:L" & lastrowL)) Then
+        Cells(2, 17).Value = Cells(i, 10).Value
+        Cells(2, 18).Value = Cells(i, 12).Value
+        Cells(2, 18).NumberFormat = "0.00%"
+    
+    'Finding minimum value and stock symbol on percent change
+    ElseIf Cells(i, 12).Value = Application.WorksheetFunction.Min(Range("L2:L" & lastrowL)) Then
+        Cells(3, 17).Value = Cells(i, 10).Value
+        Cells(3, 18).Value = Cells(i, 12).Value
+        Cells(3, 18).NumberFormat = "0.00%"
+    
+    'Finding maximum value and stock symbol on total volume
+    ElseIf Cells(i, 13).Value = Application.WorksheetFunction.Max(Range("M2:M" & lastrowL)) Then
+        Cells(4, 17).Value = Cells(i, 10).Value
+        Cells(4, 18).Value = Cells(i, 13).Value
+            
+    End If
+        
 Next i
 
 End Sub

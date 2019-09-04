@@ -1,10 +1,10 @@
 Sub Test()
 
-' Assigning a variable for the stock names
+' Assigning a header for the stock names and variable type
 Dim ticker As String
 Cells(1, 10).Value = "Ticker"
 
-' Assigning a variable for the total volume of stock
+' Assigning a header for the total volume of stock and variable type
 Dim total As Double
 Cells(1, 11).Value = "Total Stock Volume"
 
